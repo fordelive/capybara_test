@@ -25,13 +25,14 @@ end
 def prepare_browser
   @session = Capybara::Session.new DRIVER
   @session.visit 'http://demoapp.strongqa.com/'
+  @session.current_window.maximize
 end
 
-
+Capybara.default_selector = :xpath
 File.delete(OUTPUT_FILE) if File.exists?(OUTPUT_FILE)
 
 tc_01
-# tc_02
+tc_02
 # tc_03
 # tc_04
 # tc_05
