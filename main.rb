@@ -3,9 +3,9 @@ require 'dotenv/load'
 
 Dir['./test_suites/tc_??.rb'].each {|file| require_relative file}
 
+CLICK_TIMEOUT = 0 # pause before click on forms (for debug)
 DRIVER = :selenium
 TEST_URL = 'https://demoapp.strongqa.com'
-CLICK_TIMEOUT = 3
 OUTPUT_FILE = 'results.txt'.freeze
 
 USER_LOGIN = ENV.fetch('LOGIN')
@@ -24,15 +24,15 @@ end
 
 def prepare_browser
   @session = Capybara::Session.new DRIVER
-  @session.visit 'http://demoapp.strongqa.com/'
+  @session.visit TEST_URL
   @session.current_window.maximize
 end
 
 Capybara.default_selector = :xpath
 File.delete(OUTPUT_FILE) if File.exists?(OUTPUT_FILE)
 
-# tc_01
-# tc_02
-# tc_03
+tc_01
+tc_02
+tc_03
 tc_04
-# tc_05
+tc_05
