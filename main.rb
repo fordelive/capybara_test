@@ -1,5 +1,8 @@
 require 'capybara'
 require 'dotenv/load'
+require 'rspec/expectations'
+
+include RSpec::Matchers
 
 Dir['./test_suites/tc_??.rb'].each {|file| require_relative file}
 

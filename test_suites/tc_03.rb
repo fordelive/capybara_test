@@ -14,7 +14,7 @@ def tc_03
 
   @session.click_button 'Log in'
 
-  if @session.has_xpath?("//a[contains(text(), 'Logout')]")
+  if expect(@session).to have_xpath("//a[contains(text(), 'Logout')]")
     write_result("#{__method__}.1",:passed)
   else
     write_result("#{__method__}.1", :failed)
@@ -30,7 +30,7 @@ def tc_03
   session_cookies.each {|cookie| @session.driver.browser.manage.add_cookie(cookie)}
   @session.driver.refresh
 
-  if @session.has_xpath?("//a[contains(text(), 'Logout')]")
+  if expect(@session).to have_xpath("//a[contains(text(), 'Logout')]")
     write_result("#{__method__}.2",:passed)
   else
     write_result("#{__method__}.2",:failed)
@@ -50,10 +50,10 @@ def tc_03
   session_cookies.each {|cookie| @session.driver.browser.manage.add_cookie(cookie)}
   @session.driver.refresh
 
-  if @session.has_xpath?("//a[contains(text(), 'Logout')]")
-    write_result("#{__method__}.3", :failed)
-  else
+  if expect(@session).to have_xpath("//a[contains(text(), 'Login')]")
     write_result("#{__method__}.3", :passed)
+  else
+    write_result("#{__method__}.3", :failed)
   end
 
   @session.quit

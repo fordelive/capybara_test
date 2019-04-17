@@ -9,7 +9,7 @@ def tc_02 # User can login with correct credentials
 
   @session.click_button 'Log in'
 
-  if @session.has_xpath?("//a[contains(text(), 'Logout')]")
+  if expect(@session).to have_xpath("//a[contains(text(), 'Logout')]")
     write_result(__method__,:passed)
   else
     write_result(__method__,:failed)
