@@ -1,12 +1,13 @@
 require 'capybara'
 require 'capybara/dsl'
 require 'dotenv/load'
-require 'site_prism'
 require 'selenium-webdriver'
-require_relative 'auxiliaries'
+require 'site_prism'
+
+# require_relative 'auxiliaries'
 
 # loading tests
-Dir['./test_suites/tc_??.rb'].each {|file| require_relative file}
+# Dir['./test_suites/tc_??.rb'].each {|file| require_relative file}
 
 # loading classes
 Dir['./classes/*.rb'].each {|file| require_relative file}
@@ -37,7 +38,11 @@ File.delete(OUTPUT_FILE) if File.exists?(OUTPUT_FILE)
 Capybara.current_driver = DRIVER
 Capybara.app_host = TEST_URL
 
-tc_01
+TestSuite.methods.each do |method|
+  test.send method
+end
+
+# tc_01
 # tc_02
 # tc_03
 # tc_04
