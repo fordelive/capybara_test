@@ -14,11 +14,7 @@ def tc_03
 
   @session.click_button 'Log in'
 
-  if @session.has_xpath?("//a[contains(text(), 'Logout')]")
-    write_result("#{__method__}.1",:passed)
-  else
-    write_result("#{__method__}.1", :failed)
-  end
+  check_one_condition("#{__method__}.1", SIGNEDIN_CONDITION)
 
   # --------------------------case tc_03.2-------------------------------
   # User is signed in automatically when reopening the site
@@ -30,13 +26,7 @@ def tc_03
   session_cookies.each {|cookie| @session.driver.browser.manage.add_cookie(cookie)}
   @session.driver.refresh
 
-  if @session.has_xpath?("//a[contains(text(), 'Logout')]")
-    write_result("#{__method__}.2",:passed)
-  else
-    write_result("#{__method__}.2",:failed)
-    @session.quit
-    abort
-  end
+  check_one_condition("#{__method__}.2", SIGNEDIN_CONDITION)
 
   # ---------------------------case tc_03.03------------------------------
   # User shouldn't be logged the site after logout
@@ -50,11 +40,7 @@ def tc_03
   session_cookies.each {|cookie| @session.driver.browser.manage.add_cookie(cookie)}
   @session.driver.refresh
 
-  if @session.has_xpath?("//a[contains(text(), 'Logout')]")
-    write_result("#{__method__}.3", :failed)
-  else
-    write_result("#{__method__}.3", :passed)
-  end
+  check_one_condition("#{__method__}.3",NOT_SIGNED_CONDITION)
 
   @session.quit
 end

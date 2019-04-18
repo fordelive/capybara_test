@@ -1,5 +1,6 @@
 require 'capybara'
 require 'dotenv/load'
+require_relative 'auxiliaries'
 
 Dir['./test_suites/tc_??.rb'].each {|file| require_relative file}
 
@@ -14,21 +15,16 @@ USER_PASSWORD = ENV.fetch('PASSWORD')
 INCORRECT_LOGIN = 'blabla@mail.net'
 INCORRECT_PASSWORD = '123456'
 
-def write_result(tc_name, result)
-# variants of reporting strings:
-# tc_01 (firefox): passed
-# tc_01 (chrome): failed
+ON_LOGIN_FORM_CONDITION = "//h3[contains(text(),'Login form')]"
 
-  File.open(OUTPUT_FILE, 'a') {|f| f.puts"#{tc_name}: #{result}"}
-end
+NOT_SIGNED_CONDITION = "//a[contains(text(),'Login')]"
+SIGNEDIN_CONDITION = "//a[contains(text(),'Logout')]"
 
-def prepare_browser
-  @session = Capybara::Session.new DRIVER
-  @session.visit TEST_URL
-  @session.current_window.maximize
-end
+CANNOT_LOGIN_COND1 = "//span[@id='flash_alert']"
+CANNOT_LOGIN_COND2 = "//span[@id='flash_alert']"
 
 Capybara.default_selector = :xpath
+
 File.delete(OUTPUT_FILE) if File.exists?(OUTPUT_FILE)
 
 tc_01

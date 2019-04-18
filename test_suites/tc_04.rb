@@ -13,11 +13,13 @@ def tc_04
 
   @session.click_button 'Log in'
 
-  if @session.has_xpath?("//span[@id='flash_alert']") && not(@session.has_xpath?("//a[contains(text(), 'Logout')]"))
-    write_result("#{__method__}.1",:passed)
-  else
-    write_result("#{__method__}.1",:failed)
-  end
+  check_two_conditions("#{__method__}.1", CANNOT_LOGIN_COND1, CANNOT_LOGIN_COND2)
+
+  # if @session.has_xpath?("//span[@id='flash_alert']") && not(@session.has_xpath?("//a[contains(text(), 'Logout')]"))
+  #   write_result("#{__method__}.1",:passed)
+  # else
+  #   write_result("#{__method__}.1",:failed)
+  # end
 
   @session.quit
 
@@ -35,11 +37,7 @@ def tc_04
 
   @session.click_button 'Log in'
 
-  if @session.has_xpath?("//span[@id='flash_alert']") && not(@session.has_xpath?("//a[contains(text(), 'Logout')]"))
-    write_result("#{__method__}.2",:passed)
-  else
-    write_result("#{__method__}.2",:failed)
-  end
+  check_two_conditions("#{__method__}.2", CANNOT_LOGIN_COND1, CANNOT_LOGIN_COND2)
 
   @session.quit
 
@@ -57,11 +55,7 @@ def tc_04
 
   @session.click_button 'Log in'
 
-  if @session.has_xpath?("//span[@id='flash_alert']") && not(@session.has_xpath?("//a[contains(text(), 'Logout')]"))
-    write_result("#{__method__}.3",:passed)
-  else
-    write_result("#{__method__}.3",:failed)
-  end
+  check_two_conditions("#{__method__}.3", CANNOT_LOGIN_COND1, CANNOT_LOGIN_COND2)
 
   @session.quit
 end
