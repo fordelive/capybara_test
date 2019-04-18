@@ -1,12 +1,19 @@
 require 'capybara'
+require 'capybara/dsl'
 require 'dotenv/load'
+require 'site_prism'
+require 'selenium-webdriver'
 require_relative 'auxiliaries'
 
+# loading tests
 Dir['./test_suites/tc_??.rb'].each {|file| require_relative file}
+
+# loading classes
+Dir['./classes/*.rb'].each {|file| require_relative file}
 
 CLICK_TIMEOUT = 0 # pause before click on forms (for debug)
 DRIVER = :selenium
-TEST_URL = 'https://demoapp.strongqa.com'
+# TEST_URL = 'https://demoapp.strongqa.com'
 OUTPUT_FILE = 'results.txt'.freeze
 
 USER_LOGIN = ENV.fetch('LOGIN')
@@ -27,8 +34,11 @@ Capybara.default_selector = :xpath
 
 File.delete(OUTPUT_FILE) if File.exists?(OUTPUT_FILE)
 
+Capybara.current_driver = DRIVER
+Capybara.app_host = TEST_URL
+
 tc_01
-tc_02
-tc_03
-tc_04
-tc_05
+# tc_02
+# tc_03
+# tc_04
+# tc_05

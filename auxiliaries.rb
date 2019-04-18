@@ -26,7 +26,7 @@ def check_two_conditions(tc_name, condition1, condition2)
 end
 
 def prepare_browser
-  @session = Capybara::Session.new DRIVER
-  @session.visit TEST_URL
-  @session.current_window.maximize
+  @home_page = Home.new
+  @home_page.load
 end
+

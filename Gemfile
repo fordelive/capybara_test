@@ -4,7 +4,8 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-# gem "rails"
 gem 'capybara'
 gem 'dotenv'
+gem 'pry'
 gem 'selenium-webdriver'
+gem 'site_prism'
