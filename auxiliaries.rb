@@ -5,6 +5,12 @@ RESULT_FILE = 'results.txt'.freeze
 LOG_FILE = 'general.log'
 TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 
+def handle_exception(exception)
+  log_event __method__, exception.message
+  log_event __method__, exception.backtrace.inspect
+  puts exception.message
+end
+
 def log_event(method, message)
   # YYYY-MM-DD HH:MM:SS METHOD STRING
   File.open(LOG_FILE, 'a') {|f| f.puts "#{Time.now.strftime TIME_FORMAT} #{method}: #{message}"}
