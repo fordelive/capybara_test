@@ -11,27 +11,20 @@ module TestCase_01
     @home_page = HomePage.new
 
     begin
-      log_event __method__, 'Navigating to Homepage'
+      log_event __method__, 'Opening Home page'
 
       @home_page.load
       expect(@home_page).to be_displayed
+
+      log_event __method__, 'Navigating to Login page'
       @home_page.navigate_login_page
 
     rescue Exception => e
-      handle_exception e
+      handle_exception __method__, e
       abort MSG_PAGE_INACCESSIBLE
     end
 
-    begin
-      log_event __method__, 'Checking if Login page loaded'
-
-      expect(@home_page).to have_xpath(ON_LOGIN_FORM_CONDITION)
-      write_result(__method__, :passed)
-
-    rescue Exception => e
-      handle_exception e
-      write_result(__method__, :failed)
-    end
+    evaluate_result __method__, @home_page.has_xpath?(ON_LOGIN_FORM_CONDITION)
   end
 end
 

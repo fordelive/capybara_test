@@ -11,10 +11,9 @@ module TestCase_02
     @login_page = LoginPage.new
 
     begin
-      log_event __method__, 'Opening Loginpage'
+      log_event __method__, 'Opening Login page'
       @login_page.load
       expect(@login_page).to be_displayed
-      log_event __method__, 'Done'
 
     rescue Exception => e
       handle_exception e

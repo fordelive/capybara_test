@@ -7,6 +7,7 @@ class LoginPage < SitePrism::Page
   element :link_logout, "//a[contains(text(),'Logout')]"
 
   def log_user_in
+    log_event __method__, 'Logging User in'
     begin
       log_event __method__, 'Filling in email and password'
 
