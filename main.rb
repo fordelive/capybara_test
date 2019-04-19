@@ -42,5 +42,5 @@ Capybara.app_host = TEST_URL
 test_suit = TestSuite.new
 
 test_suit.public_methods(false).sort!.each do |method|
-  puts test_suit.send(method) if method.to_s.start_with?("test_case_") # &&  method.to_s == 'test_case_02'
+  puts test_suit.send(method) if method.to_s.start_with?("test_case_") &&  method.to_s == 'test_case_03'
   end
