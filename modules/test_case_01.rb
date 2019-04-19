@@ -17,7 +17,6 @@ module TestCase_01
       expect(@home_page).to be_displayed
       @home_page.navigate_login_page
 
-      log_event __method__, 'Done'
     rescue Exception => e
       handle_exception e
       abort MSG_PAGE_INACCESSIBLE
@@ -29,7 +28,6 @@ module TestCase_01
       expect(@home_page).to have_xpath(ON_LOGIN_FORM_CONDITION)
       write_result(__method__, :passed)
 
-      log_event __method__, 'Done'
     rescue Exception => e
       handle_exception e
       write_result(__method__, :failed)

@@ -11,7 +11,7 @@ log_event __method__, '===== APPLICATION STARTED ====='
 Dir['./classes/*.rb'].each {|file| require_relative file}
 Dir['./modules/*.rb'].each {|file| require_relative file}
 
-CLICK_TIMEOUT = 0 # pause before click on forms (for debug)
+CLICK_TIMEOUT = 5 # pause before click on forms (for debug)
 DRIVER = :selenium
 TEST_URL = 'https://demoapp.strongqa.com'
 
@@ -42,6 +42,5 @@ Capybara.app_host = TEST_URL
 test_suit = TestSuite.new
 
 test_suit.public_methods(false).sort!.each do |method|
-  puts test_suit.send(method) if method.to_s.start_with?("test_case_") &&
-      method.to_s == 'test_case_01'
+  puts test_suit.send(method) if method.to_s.start_with?("test_case_") # &&  method.to_s == 'test_case_02'
   end
