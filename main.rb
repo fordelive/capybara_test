@@ -4,46 +4,29 @@ require 'dotenv/load'
 require 'selenium-webdriver'
 require 'site_prism'
 
-# require_relative 'auxiliaries'
-
-# loading tests
-# Dir['./test_suites/tc_??.rb'].each {|file| require_relative file}
+require_relative 'auxiliaries'
 
 # loading classes
 Dir['./classes/*.rb'].each {|file| require_relative file}
+Dir['./modules/*.rb'].each {|file| require_relative file}
+
+log_event __method__, '===== APPLICATION STARTED ====='
+
+ON_LOGIN_FORM_CONDITION = '//h3[contains(text(),\'Login form\')]'
 
 CLICK_TIMEOUT = 0 # pause before click on forms (for debug)
 DRIVER = :selenium
-# TEST_URL = 'https://demoapp.strongqa.com'
-OUTPUT_FILE = 'results.txt'.freeze
-
-USER_LOGIN = ENV.fetch('LOGIN')
-USER_PASSWORD = ENV.fetch('PASSWORD')
-
-INCORRECT_LOGIN = 'blabla@mail.net'
-INCORRECT_PASSWORD = '123456'
-
-ON_LOGIN_FORM_CONDITION = "//h3[contains(text(),'Login form')]"
-
-NOT_SIGNED_CONDITION = "//a[contains(text(),'Login')]"
-SIGNEDIN_CONDITION = "//a[contains(text(),'Logout')]"
-
-CANNOT_LOGIN_COND1 = "//span[@id='flash_alert']"
-CANNOT_LOGIN_COND2 = "//span[@id='flash_alert']"
+TEST_URL = 'https://demoapp.strongqa.com'
 
 Capybara.default_selector = :xpath
 
-File.delete(OUTPUT_FILE) if File.exists?(OUTPUT_FILE)
+File.delete(RESULT_FILE) if File.exists?(RESULT_FILE)
 
 Capybara.current_driver = DRIVER
 Capybara.app_host = TEST_URL
 
-TestSuite.methods.each do |method|
-  test.send method
-end
+test_suit = TestSuite.new
 
-# tc_01
-# tc_02
-# tc_03
-# tc_04
-# tc_05
+test_suit.public_methods(false).sort!.each do |method|
+  puts test_suit.send(method) if method.to_s.start_with?("test_case_")
+  end

@@ -1,12 +1,21 @@
 require 'rspec/expectations'
 include RSpec::Matchers
 
+RESULT_FILE = 'results.txt'.freeze
+LOG_FILE = 'general.log'
+TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+
+def log_event(method, message)
+  # YYYY-MM-DD HH:MM:SS METHOD STRING
+  File.open(LOG_FILE, 'a') {|f| f.puts "#{Time.now.strftime TIME_FORMAT} #{method}: #{message}"}
+end
+
 def write_result(tc_name, result)
 # variants of reporting strings:
 # tc_01 (firefox): passed
 # tc_01 (chrome): failed
 
-  File.open(OUTPUT_FILE, 'a') {|f| f.puts"#{tc_name}: #{result}"}
+  File.open(RESULT_FILE, 'a') {|f| f.puts "#{tc_name}: #{result}"}
 end
 
 def check_one_condition(tc_name, condition1)
@@ -25,8 +34,8 @@ def check_two_conditions(tc_name, condition1, condition2)
   end
 end
 
-def prepare_browser
-  @home_page = Home.new
-  @home_page.load
-end
+# def prepare_browser
+#   @home_page = HomePage.new
+#   @home_page.load
+# end
 
