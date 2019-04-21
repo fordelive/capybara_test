@@ -42,16 +42,10 @@ module TestCase03
     Capybara.current_session.driver.quit
 
     @page32 = HomePage.new
-
-    # session_cookies.each {|cookie| @page32.page.driver.browser.manage.add_cookie(cookie)}
-    # @session.driver.refresh
-
     @page32.load
 
     session_cookies.each {|cookie| @page32.page.driver.browser.manage.add_cookie(cookie)}
     @page32.page.driver.refresh
-
-    sleep CLICK_TIMEOUT
 
     evaluate_result "#{__method__}.2", @page32.login_successful?
 
@@ -65,6 +59,19 @@ module TestCase03
     #     3. Open the same browser from step 2.
     #     4. Navigate to Home page.
     # ER: User should not be logged to the system.
+
+    @page32.log_user_out
+    session_cookies = Capybara.page.driver.browser.manage.all_cookies
+
+    Capybara.current_session.driver.quit
+
+    @page33 = HomePage.new
+    @page33.load
+
+    session_cookies.each {|cookie| @page33.page.driver.browser.manage.add_cookie(cookie)}
+    @page33.page.driver.refresh
+
+    evaluate_result "#{__method__}.2", @page33.logout_successful?
 
   end
 end

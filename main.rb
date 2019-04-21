@@ -10,6 +10,7 @@ include RSpec::Matchers
 
 require_relative 'auxiliaries'
 log_event __method__, '===== APPLICATION STARTED ====='
+require_relative './classes/web_page'
 
 # loading modules then classes
 Dir['./modules/*.rb'].each {|file| require_relative file}
