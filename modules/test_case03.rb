@@ -23,7 +23,7 @@ module TestCase03
       abort MSG_PAGE_INACCESSIBLE
     end
 
-    @page31.log_user_in true
+    @page31.log_user_in USER_LOGIN, USER_PASSWORD, true
 
     evaluate_result "#{__method__}.1", @page31.login_successful?
 
@@ -73,5 +73,6 @@ module TestCase03
 
     evaluate_result "#{__method__}.2", @page33.logout_successful?
 
+    Capybara.current_session.driver.quit
   end
 end

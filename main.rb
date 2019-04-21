@@ -47,5 +47,5 @@ File.delete(RESULT_FILE) if File.exists?(RESULT_FILE)
 test_suit = TestSuite.new
 
 test_suit.public_methods.sort!.each do |method|
-  test_suit.send(method) if method.to_s.start_with?('tc_')# &&  method.to_s == 'tc_03'
+  test_suit.send(method) if method.to_s.start_with?('tc_') &&  method.to_s == 'tc_04'
   end

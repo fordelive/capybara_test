@@ -6,15 +6,17 @@ class WebPage < SitePrism::Page
   element :checkbox_remember_me, "//label[@for='user_remember_me']"
 
   element :link_login, "//a[contains(text(),'Login')]"
-  element :heading_login_form, '//h3[contains(text(),\'Login form\')]'
+  element :heading_login_form, "//h3[contains(text(),'Login form')]"
 
-  def log_user_in(remember_me = false)
+  element :flash_alert, "//span[contains(text(), 'Invalid email or password')]"
+
+  def log_user_in(user_login, user_password, remember_me = false)
     log_event __method__, 'Logging User in'
     begin
       log_event __method__, 'Filling in email and password'
 
-      field_email.set USER_LOGIN
-      field_password.set USER_PASSWORD
+      field_email.set user_login
+      field_password.set user_password
       checkbox_remember_me.click if remember_me
 
       sleep CLICK_TIMEOUT
@@ -47,5 +49,9 @@ class WebPage < SitePrism::Page
 
   def logout_successful?
     link_login.exist
+  end
+
+  def login_failed?
+    flash_alert.exist
   end
 end
