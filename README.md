@@ -1,6 +1,6 @@
 # capybara_test
 
-Capybara based test suite for testing https://demoapp.strongqa.com/
+Capybara/site-prism based test suite for testing https://demoapp.strongqa.com/
 
 ## Getting Started
 
@@ -32,6 +32,7 @@ Ruby 2.6.0
 capybara 3.15.0
 dotenv 2.7.2
 selenium-webdriver 3.141.0
+site-prism 3.1
 ```
 
 ### Installing

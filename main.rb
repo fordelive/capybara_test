@@ -16,7 +16,6 @@ require_relative './classes/web_page'
 Dir['./modules/*.rb'].each {|file| require_relative file}
 Dir['./classes/*.rb'].each {|file| require_relative file}
 
-
 CLICK_TIMEOUT = 0 # pause before click on forms (for debug)
 DRIVER = :selenium
 TEST_URL = 'https://demoapp.strongqa.com'.freeze
@@ -29,14 +28,7 @@ INCORRECT_PASSWORD = '123456'.freeze
 
 ON_LOGIN_FORM_CONDITION = '//h3[contains(text(),\'Login form\')]'.freeze
 
-NOT_SIGNED_CONDITION = '//a[contains(text(),\'Login\')]'.freeze
-SIGNEDIN_CONDITION = '//a[contains(text(),\'Logout\')]'.freeze
-
-CANNOT_LOGIN_COND1 = '//span[@id=\'flash_alert\']'.freeze
-CANNOT_LOGIN_COND2 = '//span[@id=\'flash_alert\']'.freeze
-
 MSG_PAGE_INACCESSIBLE = 'Page cannot be accessed!!! Aborting.'.freeze
-
 
 Capybara.default_selector = :xpath
 Capybara.current_driver = DRIVER

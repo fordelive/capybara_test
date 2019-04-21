@@ -21,28 +21,6 @@ def write_result(method_name, result)
   File.open(RESULT_FILE, 'a') {|f| f.puts "#{method_name}: #{result}"}
 end
 
-# def check_one_condition(page, condition1, method_name, log_msg)
-#   begin
-#     log_event method_name, log_msg
-#
-#     expect(page).to have_xpath(condition1)
-#     write_result(method_name, :passed)
-#
-#     log_event method_name, 'Done'
-#   rescue Exception => e
-#     handle_exception e
-#     write_result(method_name, :failed)
-#   end
-# end
-
-def check_two_conditions(tc_name, condition1, condition2)
-  if @session.has_xpath?(condition1) && @session.has_xpath?(condition2)
-    write_result(tc_name,:passed)
-  else
-    write_result(tc_name,:failed)
-  end
-end
-
 def evaluate_result(method_name, result)
   log_event __method__, 'Evaluating result'
 
