@@ -1,5 +1,6 @@
-module TestCase_03
-  def TestCase_03.tc_03_1
+module TestCase03
+  def tc_03
+    # tc 03.1
     # Description:
     #     User can login with remembering credentials
     # STR:
@@ -9,20 +10,24 @@ module TestCase_03
     #     4. Click 'Enter' button.
     # ER: User should be logged and redirected to home page.
 
+    @page31 = LoginPage.new
+
     begin
       log_event __method__, 'Opening Login page'
-      @login_page = LoginPage.new.load
-      expect(@login_page).to be_displayed
+
+      @page31.load
+      expect(@page31).to be_displayed
 
     rescue Exception => e
       handle_exception __method__, e
       abort MSG_PAGE_INACCESSIBLE
     end
 
+    @page31.log_user_in true
 
-  end
+    evaluate_result "#{__method__}.1", @page31.login_successful?
 
-  def TestCase_03.tc_03_2
+    # tc 03.2
     # Description:
     #     User can login with remembering credentials
     # STR:
@@ -32,9 +37,25 @@ module TestCase_03
     #     3. Navigate to Home page.
     # ER: User should be logged to the system.
 
-  end
+    session_cookies = Capybara.page.driver.browser.manage.all_cookies
 
-  def TestCase_03.tc_03_3
+    Capybara.current_session.driver.quit
+
+    @page32 = HomePage.new
+
+    # session_cookies.each {|cookie| @page32.page.driver.browser.manage.add_cookie(cookie)}
+    # @session.driver.refresh
+
+    @page32.load
+
+    session_cookies.each {|cookie| @page32.page.driver.browser.manage.add_cookie(cookie)}
+    @page32.page.driver.refresh
+
+    sleep CLICK_TIMEOUT
+
+    evaluate_result "#{__method__}.2", @page32.login_successful?
+
+    # tc 03.3
     # Description:
     #     User shouldn't be logged to the system after logout
     # STR:

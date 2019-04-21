@@ -1,6 +1,3 @@
-require 'rspec/expectations'
-include RSpec::Matchers
-
 RESULT_FILE = 'results.txt'.freeze
 LOG_FILE = 'general.log'
 TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
