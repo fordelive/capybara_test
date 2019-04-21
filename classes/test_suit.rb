@@ -1,4 +1,4 @@
-class TestSuite
+class TestSuit
   include TestCase01
   include TestCase02
   include TestCase03
