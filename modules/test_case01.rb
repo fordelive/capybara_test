@@ -26,7 +26,7 @@ module TestCase01
 
     evaluate_result __method__, @page1.has_xpath?(ON_LOGIN_FORM_CONDITION)
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
   end
 end
 

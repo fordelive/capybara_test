@@ -39,7 +39,7 @@ module TestCase03
 
     session_cookies = Capybara.page.driver.browser.manage.all_cookies
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
 
     @page32 = HomePage.new
     @page32.load
@@ -63,7 +63,7 @@ module TestCase03
     @page32.log_user_out
     session_cookies = Capybara.page.driver.browser.manage.all_cookies
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
 
     @page33 = HomePage.new
     @page33.load
@@ -73,6 +73,6 @@ module TestCase03
 
     evaluate_result "#{__method__}.2", @page33.logout_successful?
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
   end
 end

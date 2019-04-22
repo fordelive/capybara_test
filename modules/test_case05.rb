@@ -28,7 +28,7 @@ module TestCase05
 
     evaluate_result "#{__method__}.1", @page51.login_failed?
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
 
     # ts_05.2
     # Descriptiom: User cannot login with incorrect password
@@ -58,7 +58,7 @@ module TestCase05
 
     evaluate_result "#{__method__}.2", @page52.login_failed?
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
 
     # Description: User cannot login with incorrect data
     # STR:
@@ -87,6 +87,6 @@ module TestCase05
 
     evaluate_result "#{__method__}.3", @page53.login_failed?
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
   end
 end

@@ -27,6 +27,6 @@ module TestCase02
 
     evaluate_result __method__, @page2.login_successful?
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
   end
 end

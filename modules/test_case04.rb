@@ -28,7 +28,7 @@ module TestCase04
 
     evaluate_result "#{__method__}.1", @page41.login_failed?
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
 
     # ts_04.2
     # Descriptiom: User cannot login with blank email
@@ -58,7 +58,7 @@ module TestCase04
 
     evaluate_result "#{__method__}.2", @page42.login_failed?
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
 
     # Description: User cannot login with blank data
     # STR:
@@ -87,6 +87,6 @@ module TestCase04
 
     evaluate_result "#{__method__}.3", @page43.login_failed?
 
-    Capybara.current_session.driver.quit
+    Capybara.current_session.reset_session!
   end
 end
