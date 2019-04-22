@@ -24,16 +24,19 @@ module TestCase04
 
       @page41.log_user_in USER_LOGIN, ''
 
-    rescue Exception => e
-      handle_exception "#{__method__}.1", e
-      abort MSG_PAGE_INACCESSIBLE
+      result = evaluate_result "#{__method__}.1", @page41.login_failed?
+
+    rescue Selenium::WebDriver::Error::WebDriverError => e
+      handle_exception __method__, e
+
+    rescue Capybara::ElementNotFound => e
+      handle_exception __method__, e
+
+    else
+      puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
+    ensure
+      Capybara.current_session.reset_session!
     end
-
-    result = evaluate_result "#{__method__}.1", @page41.login_failed?
-
-    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
-
-    Capybara.current_session.reset_session!
 
     # ts_04.2
     # Descriptiom: User cannot login with blank email
@@ -59,16 +62,18 @@ module TestCase04
 
       @page42.log_user_in '', USER_PASSWORD
 
-    rescue Exception => e
-      handle_exception "#{__method__}.2", e
-      abort MSG_PAGE_INACCESSIBLE
+      result = evaluate_result "#{__method__}.2", @page42.login_failed?
+
+    rescue Selenium::WebDriver::Error::WebDriverError => e
+      handle_exception __method__, e
+
+    rescue Capybara::ElementNotFound => e
+      handle_exception __method__, e
+    else
+      puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
+    ensure
+      Capybara.current_session.reset_session!
     end
-
-    result = evaluate_result "#{__method__}.2", @page42.login_failed?
-
-    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
-
-    Capybara.current_session.reset_session!
 
     # Description: User cannot login with blank data
     # STR:
@@ -93,15 +98,17 @@ module TestCase04
 
       @page43.log_user_in '', ''
 
-    rescue Exception => e
-      handle_exception "#{__method__}.3", e
-      abort MSG_PAGE_INACCESSIBLE
+      result = evaluate_result "#{__method__}.3", @page43.login_failed?
+
+    rescue Selenium::WebDriver::Error::WebDriverError => e
+      handle_exception __method__, e
+
+    rescue Capybara::ElementNotFound => e
+      handle_exception __method__, e
+    else
+      puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
+    ensure
+      Capybara.current_session.reset_session!
     end
-
-    result = evaluate_result "#{__method__}.3", @page43.login_failed?
-
-    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
-
-    Capybara.current_session.reset_session!
   end
 end

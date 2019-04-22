@@ -21,16 +21,19 @@ module TestCase03
       @page31.load
       expect(@page31).to be_displayed
 
-    rescue Exception => e
+      @page31.log_user_in USER_LOGIN, USER_PASSWORD, true
+
+      result = evaluate_result "#{__method__}.1", @page31.login_successful?
+
+    rescue Selenium::WebDriver::Error::WebDriverError => e
       handle_exception __method__, e
-      abort MSG_PAGE_INACCESSIBLE
+
+    rescue Capybara::ElementNotFound => e
+      handle_exception __method__, e
+
+    else
+      puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
     end
-
-    @page31.log_user_in USER_LOGIN, USER_PASSWORD, true
-
-    result = evaluate_result "#{__method__}.1", @page31.login_successful?
-
-    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
 
     # tc 03.2
     # Description:
@@ -50,14 +53,25 @@ module TestCase03
     Capybara.current_session.reset_session!
 
     @page32 = HomePage.new
-    @page32.load
 
-    session_cookies.each {|cookie| @page32.page.driver.browser.manage.add_cookie(cookie)}
-    @page32.page.driver.refresh
+    begin
+      @page32.load
 
-    result = evaluate_result "#{__method__}.2", @page32.login_successful?
+      session_cookies.each {|cookie| @page32.page.driver.browser.manage.add_cookie(cookie)}
+      @page32.page.driver.refresh
 
-    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
+      result = evaluate_result "#{__method__}.2", @page32.login_successful?
+
+    rescue Selenium::WebDriver::Error::WebDriverError => e
+      handle_exception __method__, e
+
+    rescue Capybara::ElementNotFound => e
+      handle_exception __method__, e
+
+    else
+      puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
+
+    end
 
     # tc 03.3
     # Description:
@@ -73,21 +87,29 @@ module TestCase03
     start_time = Time.now
     puts "#{MSG_STARTING_TEST} tc 03.3"
 
-    @page32.log_user_out
-    session_cookies = Capybara.page.driver.browser.manage.all_cookies
+    begin
+      @page32.log_user_out
+      session_cookies = Capybara.page.driver.browser.manage.all_cookies
 
-    Capybara.current_session.reset_session!
+      Capybara.current_session.reset_session!
 
-    @page33 = HomePage.new
-    @page33.load
+      @page33 = HomePage.new
+      @page33.load
 
-    session_cookies.each {|cookie| @page33.page.driver.browser.manage.add_cookie(cookie)}
-    @page33.page.driver.refresh
+      session_cookies.each {|cookie| @page33.page.driver.browser.manage.add_cookie(cookie)}
+      @page33.page.driver.refresh
 
-    result = evaluate_result "#{__method__}.3", @page33.logout_successful?
+      result = evaluate_result "#{__method__}.3", @page33.logout_successful?
+    rescue Selenium::WebDriver::Error::WebDriverError => e
+      handle_exception __method__, e
 
-    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
+    rescue Capybara::ElementNotFound => e
+      handle_exception __method__, e
 
-    Capybara.current_session.reset_session!
+    else
+      puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
+    ensure
+      Capybara.current_session.reset_session!
+    end
   end
 end

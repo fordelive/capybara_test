@@ -12,6 +12,8 @@ module TestCase01
     puts "#{MSG_STARTING_TEST} tc 01"
 
     @page1 = HomePage.new
+    # @page1.load
+    # @page1.navigate_login_page
 
     begin
       log_event __method__, 'Opening Home page'
@@ -20,18 +22,23 @@ module TestCase01
       expect(@page1).to be_displayed
 
       log_event __method__, 'Navigating to Login page'
-    rescue Exception => e
+
+      @page1.navigate_login_page
+
+      result = evaluate_result __method__, @page1.has_xpath?(ON_LOGIN_FORM_CONDITION)
+
+    rescue   => e
       handle_exception __method__, e
-      abort MSG_PAGE_INACCESSIBLE
+
+    rescue Capybara::ElementNotFound => e
+      handle_exception __method__, e
+
+    else
+      puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
+
+    ensure
+      Capybara.current_session.reset_session!
     end
-
-    @page1.navigate_login_page
-
-    result = evaluate_result __method__, @page1.has_xpath?(ON_LOGIN_FORM_CONDITION)
-
-    Capybara.current_session.reset_session!
-
-    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
   end
 end
 

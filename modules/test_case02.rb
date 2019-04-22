@@ -23,15 +23,21 @@ module TestCase02
       log_event __method__, 'Log user in'
       @page2.log_user_in USER_LOGIN, USER_PASSWORD
 
-    rescue Exception => e
+      result = evaluate_result __method__, @page2.login_successful?
+
+    rescue Selenium::WebDriver::Error::WebDriverError => e
       handle_exception __method__, e
-      abort MSG_PAGE_INACCESSIBLE
+
+    rescue Capybara::ElementNotFound => e
+      handle_exception __method__, e
+
+    else
+      puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
+
+    ensure
+      Capybara.current_session.reset_session!
+
     end
 
-    result = evaluate_result __method__, @page2.login_successful?
-
-    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
-
-    Capybara.current_session.reset_session!
   end
 end
