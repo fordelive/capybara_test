@@ -37,4 +37,6 @@ site-prism 3.1
 
 ### Installing
 
-Installation is not needed.
+To fetch all needed gems issue the command:
+
+`$ bundle install`
