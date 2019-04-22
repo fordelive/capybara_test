@@ -8,6 +8,9 @@ module TestCase01
   # ER: User should be redirected to login page
 
   def tc_01
+    start_time = Time.now
+    puts "#{MSG_STARTING_TEST} tc 01"
+
     @page1 = HomePage.new
 
     begin
@@ -24,9 +27,11 @@ module TestCase01
 
     @page1.navigate_login_page
 
-    evaluate_result __method__, @page1.has_xpath?(ON_LOGIN_FORM_CONDITION)
+    result = evaluate_result __method__, @page1.has_xpath?(ON_LOGIN_FORM_CONDITION)
 
     Capybara.current_session.reset_session!
+
+    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
   end
 end
 

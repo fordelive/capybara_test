@@ -9,6 +9,9 @@ module TestCase02
   # ER: User should be logged and redirected to home page
 
   def tc_02
+    start_time = Time.now
+    puts "#{MSG_STARTING_TEST} tc 02"
+
     @page2 = LoginPage.new
 
     begin
@@ -25,7 +28,9 @@ module TestCase02
       abort MSG_PAGE_INACCESSIBLE
     end
 
-    evaluate_result __method__, @page2.login_successful?
+    result = evaluate_result __method__, @page2.login_successful?
+
+    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
 
     Capybara.current_session.reset_session!
   end

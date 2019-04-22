@@ -10,6 +10,9 @@ module TestCase03
     #     4. Click 'Enter' button.
     # ER: User should be logged and redirected to home page.
 
+    start_time = Time.now
+    puts "#{MSG_STARTING_TEST} tc 03.1"
+
     @page31 = LoginPage.new
 
     begin
@@ -25,7 +28,9 @@ module TestCase03
 
     @page31.log_user_in USER_LOGIN, USER_PASSWORD, true
 
-    evaluate_result "#{__method__}.1", @page31.login_successful?
+    result = evaluate_result "#{__method__}.1", @page31.login_successful?
+
+    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
 
     # tc 03.2
     # Description:
@@ -37,6 +42,9 @@ module TestCase03
     #     3. Navigate to Home page.
     # ER: User should be logged to the system.
 
+    start_time = Time.now
+    puts "#{MSG_STARTING_TEST} tc 03.2"
+
     session_cookies = Capybara.page.driver.browser.manage.all_cookies
 
     Capybara.current_session.reset_session!
@@ -47,7 +55,9 @@ module TestCase03
     session_cookies.each {|cookie| @page32.page.driver.browser.manage.add_cookie(cookie)}
     @page32.page.driver.refresh
 
-    evaluate_result "#{__method__}.2", @page32.login_successful?
+    result = evaluate_result "#{__method__}.2", @page32.login_successful?
+
+    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
 
     # tc 03.3
     # Description:
@@ -60,6 +70,9 @@ module TestCase03
     #     4. Navigate to Home page.
     # ER: User should not be logged to the system.
 
+    start_time = Time.now
+    puts "#{MSG_STARTING_TEST} tc 03.3"
+
     @page32.log_user_out
     session_cookies = Capybara.page.driver.browser.manage.all_cookies
 
@@ -71,7 +84,9 @@ module TestCase03
     session_cookies.each {|cookie| @page33.page.driver.browser.manage.add_cookie(cookie)}
     @page33.page.driver.refresh
 
-    evaluate_result "#{__method__}.2", @page33.logout_successful?
+    result = evaluate_result "#{__method__}.3", @page33.logout_successful?
+
+    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
 
     Capybara.current_session.reset_session!
   end

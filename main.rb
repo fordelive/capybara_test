@@ -29,6 +29,8 @@ INCORRECT_PASSWORD = '123456'.freeze
 ON_LOGIN_FORM_CONDITION = '//h3[contains(text(),\'Login form\')]'.freeze
 
 MSG_PAGE_INACCESSIBLE = 'Page cannot be accessed!!! Aborting.'.freeze
+MSG_STARTING_TEST = 'Starting test case'
+MSG_FINISHING_TEST = 'Test case:'
 
 Capybara.default_selector = :xpath
 Capybara.current_driver = DRIVER

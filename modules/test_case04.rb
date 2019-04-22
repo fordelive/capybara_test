@@ -9,6 +9,9 @@ module TestCase04
     #     4. Click 'Enter' button.
     # ER: User should not be logged to the system. User should see next message:'Invalid email or password.'
 
+    start_time = Time.now
+    puts "#{MSG_STARTING_TEST} tc 04.1"
+
     @page41 = LoginPage.new
 
     begin
@@ -26,7 +29,9 @@ module TestCase04
       abort MSG_PAGE_INACCESSIBLE
     end
 
-    evaluate_result "#{__method__}.1", @page41.login_failed?
+    result = evaluate_result "#{__method__}.1", @page41.login_failed?
+
+    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
 
     Capybara.current_session.reset_session!
 
@@ -38,6 +43,9 @@ module TestCase04
     #      3. Email field shoud be empty.
     #      4. Click 'Enter' button
     # ER: User should not be logged to the system. User should see next message: 'Invalid email or password.'
+
+    start_time = Time.now
+    puts "#{MSG_STARTING_TEST} tc 04.2"
 
     @page42 = LoginPage.new
 
@@ -56,7 +64,9 @@ module TestCase04
       abort MSG_PAGE_INACCESSIBLE
     end
 
-    evaluate_result "#{__method__}.2", @page42.login_failed?
+    result = evaluate_result "#{__method__}.2", @page42.login_failed?
+
+    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
 
     Capybara.current_session.reset_session!
 
@@ -67,6 +77,9 @@ module TestCase04
     #      3. Click 'Enter' button.
     #
     # ER: User should not be logged to the system. User should see next message: 'Invalid email or password.'
+
+    start_time = Time.now
+    puts "#{MSG_STARTING_TEST} tc 04.3"
 
     @page43 = LoginPage.new
 
@@ -85,7 +98,9 @@ module TestCase04
       abort MSG_PAGE_INACCESSIBLE
     end
 
-    evaluate_result "#{__method__}.3", @page43.login_failed?
+    result = evaluate_result "#{__method__}.3", @page43.login_failed?
+
+    puts "#{MSG_FINISHING_TEST} #{result} (execution time: #{Time.now - start_time})"
 
     Capybara.current_session.reset_session!
   end

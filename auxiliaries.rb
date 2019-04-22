@@ -26,7 +26,9 @@ def evaluate_result(method_name, result)
 
   if result
     write_result method_name, :passed
+    'PASSED'
   else
     write_result method_name, :failed
+    'FAILED'
   end
 end
