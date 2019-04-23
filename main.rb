@@ -12,8 +12,8 @@ require_relative 'auxiliaries'
 log_event __method__, '===== APPLICATION STARTED ====='
 require_relative './classes/web_page'
 
-# loading modules then classes
-Dir['./modules/*.rb'].each {|file| require_relative file}
+# loading spec then classes
+Dir['./spec/*.rb'].each {|file| require_relative file}
 Dir['./classes/*.rb'].each {|file| require_relative file}
 
 CLICK_TIMEOUT = 0 # pause before click on forms (for debug)
