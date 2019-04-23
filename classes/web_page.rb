@@ -40,7 +40,7 @@ class WebPage < SitePrism::Page
   end
 
   def on_login_page?
-    heading_login_form.exist
+    heading_login_form.visible?
   end
 
   def login_successful?

@@ -6,15 +6,6 @@
 #   3. Click on 'Login' item.
 # ER: User should be redirected to login page
 
-require 'capybara'
-require 'capybara/rspec'
-require 'capybara/dsl'
-require 'dotenv/load'
-require 'rspec/expectations'
-require 'selenium-webdriver'
-require 'site_prism'
-require_relative '../auxiliaries'
-
 Dir['./classes/*.rb'].sort.reverse!.each {|file| require file}
 
 Capybara.default_selector = :xpath
@@ -28,7 +19,6 @@ RSpec.describe 'Login page can be opened via menu' do
     page.load
     page.navigate_login_page
     expect(page).to be_on_login_page
-    # expect(page.on_login_page?).to be true
   end
 
 end
