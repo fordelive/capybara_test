@@ -1,6 +1,3 @@
-Dir['./classes/*.rb'].sort.reverse!.each {|file| require file}
-
-
 USER_LOGIN = ENV.fetch('LOGIN')
 USER_PASSWORD = ENV.fetch('PASSWORD')
 

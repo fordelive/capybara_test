@@ -1,4 +1,6 @@
 Bundler.require(:test)
+Dotenv.load
+Dir['./classes/*.rb'].sort.reverse!.each {|file| require file}
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
