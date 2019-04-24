@@ -1,6 +1,7 @@
 Bundler.require(:test)
 Dotenv.load
 Dir['./classes/*.rb'].sort.reverse!.each {|file| require file}
+require 'shared_examples'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

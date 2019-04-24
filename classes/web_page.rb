@@ -11,16 +11,11 @@ class WebPage < SitePrism::Page
   element :flash_alert, "//span[contains(text(), 'Invalid email or password')]"
 
   def log_user_in(user_login, user_password, remember_me = false)
-    begin
       field_email.set user_login
       field_password.set user_password
       checkbox_remember_me.click if remember_me
 
       btn_submit.click
-
-    rescue Exception => e
-      handle_exception __method__, e
-    end
   end
 
   def log_user_out
@@ -40,10 +35,10 @@ class WebPage < SitePrism::Page
   end
 
   def logout_successful?
-    link_login.exist
+    link_login.visible?
   end
 
   def login_failed?
-    flash_alert.exist
+    flash_alert.visible?
   end
 end
