@@ -7,7 +7,6 @@ INCORRECT_LOGIN = 'blabla@mail.net'
 INCORRECT_PASSWORD = '123456'
 
 describe 'User opens Login page' do #tc 01
-  include RSpec::Matchers
   context 'by clicking Login menu' do
     it 'Login page is opened' do
       page = HomePage.new
