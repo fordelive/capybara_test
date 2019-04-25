@@ -20,7 +20,7 @@ end
 
 describe 'User logs in' do
   context 'with correct credentials' do #tc 02
-    after(:each) {Capybara.current_session.reset_session!}
+
     include_examples 'User can log in', USER_LOGIN, USER_PASSWORD
   end
 
@@ -28,40 +28,6 @@ describe 'User logs in' do
     include_examples 'User can log in', USER_LOGIN, USER_PASSWORD, true
   end
 
-  context 'when logged in User opens homepage' do
-    it 'he is logged in' do # tc 3.2
-      session_cookies = Capybara.page.driver.browser.manage.all_cookies
-      Capybara.current_session.reset_session!
-
-      @@page = HomePage.new
-      @@page.load
-      @@page.page.driver.browser.manage.delete_all_cookies
-      session_cookies.each {|cookie| @@page.page.driver.browser.manage.add_cookie(cookie)}
-      @@page.page.driver.refresh
-
-      expect(@@page).to be_login_successful
-    end
-  end
-
-  context 'when logged User opens homepage' do
-    it 'he is not logged in' do # tc 3.3
-      @@page.log_user_out
-      session_cookies = Capybara.page.driver.browser.manage.all_cookies
-
-      Capybara.current_session.reset_session!
-
-      page2 = HomePage.new
-      page2.load
-      page2.page.driver.browser.manage.delete_all_cookies
-      session_cookies.each {|cookie| page2.page.driver.browser.manage.add_cookie(cookie)}
-
-      expect(page2).to be_logout_successful
-    end
-  end
-end
-
-describe 'User logs in' do
-  before(:each) {Capybara.current_session.reset_session!}
   context 'with blank password' do
     include_examples 'User cannot log in', USER_LOGIN, ''
   end
@@ -71,10 +37,7 @@ describe 'User logs in' do
   context 'with blank with blank data' do
     include_examples 'User cannot log in', '', ''
   end
-end
 
-describe 'User logs in' do
-  after(:each) {Capybara.current_session.reset_session!}
   context 'with incorrect email' do
     include_examples 'User cannot log in', INCORRECT_LOGIN, USER_PASSWORD
   end
@@ -86,3 +49,35 @@ describe 'User logs in' do
   end
 end
 
+
+#   context 'when logged in User opens homepage' do
+#     it 'he is logged in' do # tc 3.2
+#       session_cookies = Capybara.page.driver.browser.manage.all_cookies
+#       Capybara.current_session.reset_session!
+#
+#       @@page = HomePage.new
+#       @@page.load
+#       @@page.page.driver.browser.manage.delete_all_cookies
+#       session_cookies.each {|cookie| @@page.page.driver.browser.manage.add_cookie(cookie)}
+#       @@page.page.driver.refresh
+#
+#       expect(@@page).to be_login_successful
+#     end
+#   end
+#
+#   context 'when logged User opens homepage' do
+#     it 'he is not logged in' do # tc 3.3
+#       @@page.log_user_out
+#       session_cookies = Capybara.page.driver.browser.manage.all_cookies
+#
+#       Capybara.current_session.reset_session!
+#
+#       page2 = HomePage.new
+#       page2.load
+#       page2.page.driver.browser.manage.delete_all_cookies
+#       session_cookies.each {|cookie| page2.page.driver.browser.manage.add_cookie(cookie)}
+#
+#       expect(page2).to be_logout_successful
+#     end
+#   end
+# end
