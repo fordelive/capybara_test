@@ -12,9 +12,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.shared_context_metadata_behavior = :apply_to_host_groups
-  config.after(:example) {Capybara.current_session.reset_session!}
-
+  config.shared_context_metadata_behavior = :apply_to_host_group
 end
 
 Capybara.configure do |config|

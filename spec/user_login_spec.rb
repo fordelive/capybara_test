@@ -19,8 +19,8 @@ describe 'User opens Login page' do #tc 01
 end
 
 describe 'User logs in' do
+  after(:each) {Capybara.current_session.reset_session!}
   context 'with correct credentials' do #tc 02
-
     include_examples 'User can log in', USER_LOGIN, USER_PASSWORD
   end
 
@@ -49,35 +49,49 @@ describe 'User logs in' do
   end
 end
 
+describe 'User opens Home page' do
+  let(:log_user_in) do
+    page = LoginPage.new
+    page.load
+    page.log_user_in USER_LOGIN, USER_PASSWORD
+    return page
+  end
+  let(:open_home_page) do
+    page = HomePage.new
+    page.load
+    page.page.driver.browser.manage.delete_all_cookies
+    @session_cookies.each {|cookie| page.page.driver.browser.manage.add_cookie(cookie)}
+    return page
+  end
 
-#   context 'when logged in User opens homepage' do
-#     it 'he is logged in' do # tc 3.2
-#       session_cookies = Capybara.page.driver.browser.manage.all_cookies
-#       Capybara.current_session.reset_session!
-#
-#       @@page = HomePage.new
-#       @@page.load
-#       @@page.page.driver.browser.manage.delete_all_cookies
-#       session_cookies.each {|cookie| @@page.page.driver.browser.manage.add_cookie(cookie)}
-#       @@page.page.driver.refresh
-#
-#       expect(@@page).to be_login_successful
-#     end
-#   end
-#
-#   context 'when logged User opens homepage' do
-#     it 'he is not logged in' do # tc 3.3
-#       @@page.log_user_out
-#       session_cookies = Capybara.page.driver.browser.manage.all_cookies
-#
-#       Capybara.current_session.reset_session!
-#
-#       page2 = HomePage.new
-#       page2.load
-#       page2.page.driver.browser.manage.delete_all_cookies
-#       session_cookies.each {|cookie| page2.page.driver.browser.manage.add_cookie(cookie)}
-#
-#       expect(page2).to be_logout_successful
-#     end
-#   end
-# end
+  context 'when User logged in with remember_me' do
+    after(:context) {Capybara.current_session.reset_session!}
+    it 'User stays logged in' do
+      log_user_in
+
+      @session_cookies = Capybara.page.driver.browser.manage.all_cookies
+      Capybara.current_session.reset_session!
+
+      page = open_home_page
+      page.page.driver.refresh
+
+      expect(page).to be_login_successful
+    end
+  end
+
+  context 'when User logged out' do
+    it 'User stays logged out' do
+      page = log_user_in
+
+      page.log_user_out
+      @session_cookies = Capybara.page.driver.browser.manage.all_cookies
+      Capybara.current_session.reset_session!
+
+      page = open_home_page
+      page.page.driver.refresh
+
+      expect(page).to be_logout_successful
+    end
+  end
+end
+
