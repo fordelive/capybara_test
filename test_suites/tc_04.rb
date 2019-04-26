@@ -6,7 +6,7 @@ def tc_04
 
   @session.click_link 'Login'
 
-  @session.fill_in(:id => 'user_email', :with => USER_LOGIN)
+  @session.fill_in(:id => 'user_email', :with => CORRECT_LOGIN)
   @session.fill_in(:id => 'user_password', :with => '')
 
   sleep(CLICK_TIMEOUT)

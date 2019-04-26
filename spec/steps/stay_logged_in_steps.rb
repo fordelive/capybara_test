@@ -2,7 +2,7 @@ module StayLoggedInSteps
   step "I am logged in" do
     @page = LoginPage.new
     @page.load
-    @page.log_user_in USER_LOGIN, USER_PASSWORD, true
+    @page.log_user_in CORRECT_LOGIN, CORRECT_PASSWORD, true
   end
 
   step "I reopen browser and open Homepage"do

@@ -9,7 +9,7 @@ DRIVER = :selenium
 TEST_URL = 'https://demoapp.strongqa.com'
 OUTPUT_FILE = 'results.txt'.freeze
 
-USER_LOGIN = ENV.fetch('LOGIN')
+CORRECT_LOGIN = ENV.fetch('LOGIN')
 USER_PASSWORD = ENV.fetch('PASSWORD')
 
 INCORRECT_LOGIN = 'blabla@mail.net'

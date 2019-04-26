@@ -6,7 +6,7 @@ def tc_03
 
   @session.click_link 'Login'
 
-  @session.fill_in(:id => 'user_email', :with => USER_LOGIN)
+  @session.fill_in(:id => 'user_email', :with => CORRECT_LOGIN)
   @session.fill_in(:id => 'user_password', :with => USER_PASSWORD)
   @session.find("//label[@for='user_remember_me']").click
 

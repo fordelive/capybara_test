@@ -3,7 +3,7 @@ def tc_02 # User can login with correct credentials
 
   @session.click_link 'Login'
 
-  @session.fill_in(:id => 'user_email', :with => USER_LOGIN)
+  @session.fill_in(:id => 'user_email', :with => CORRECT_LOGIN)
   @session.fill_in(:id => 'user_password', :with => USER_PASSWORD)
   sleep(CLICK_TIMEOUT)
 
