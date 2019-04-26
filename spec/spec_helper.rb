@@ -7,7 +7,8 @@ RSpec.configure do |config|
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
-  # config.include OpenLoginPage
+
+  config.after(:each) {Capybara.current_session.reset_session!}
 end
 
 Bundler.require :test
