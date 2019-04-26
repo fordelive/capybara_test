@@ -4,7 +4,7 @@ module OpenLoginPageSteps
     @page.load
   end
 
-  step "I click :name link" do |name|
+  step "I click Login link" do
     @page.navigate_login_page
   end
 
