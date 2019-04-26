@@ -2,9 +2,12 @@
 
 source "https://rubygems.org"
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
-
-# gem "rails"
-gem 'capybara'
-gem 'dotenv'
-gem 'selenium-webdriver'
+group :test do
+  gem 'byebug'
+  gem 'capybara', require: 'capybara/rspec'
+  gem 'dotenv',   require: 'dotenv/load'
+  gem 'rspec'
+  gem 'selenium-webdriver'
+  gem 'site_prism'
+  gem 'turnip'
+end
