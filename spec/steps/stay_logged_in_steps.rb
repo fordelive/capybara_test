@@ -1,11 +1,9 @@
-module StayLoggedInSteps
-  step "I am logged in" do
-    @page = LoginPage.new
-    @page.load
-    @page.log_user_in CORRECT_LOGIN, CORRECT_PASSWORD, true
-  end
+require_relative 'i_am_logged_in'
 
-  step "I reopen browser and open Homepage"do
+module StayLoggedInSteps
+  step "I am logged in"
+
+  step "I reopen browser and open Homepage" do
     @session_cookies = Capybara.page.driver.browser.manage.all_cookies
     sleep 3
     Capybara.current_session.reset_session!
