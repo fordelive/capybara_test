@@ -3,7 +3,6 @@ GEM
   specs:
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
-    byebug (11.0.1)
     c21e (1.1.9)
     capybara (3.15.0)
       addressable
@@ -63,13 +62,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
-  capybara
-  dotenv
-  rspec
-  selenium-webdriver
-  site_prism
-  turnip
+  capybara (>= 3.15.0)
+  dotenv (>= 2.7.2)
+  rspec (>= 3.8.0)
+  selenium-webdriver (>= 3.141.0)
+  site_prism (>= 3.1)
+  turnip (>= 4.0.1)
+
+RUBY VERSION
+   ruby 2.6.0p0
 
 BUNDLED WITH
    1.17.2

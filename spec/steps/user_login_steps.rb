@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module UserLoginSteps
-  step "I visit Login page" do
+  step 'I visit Login page' do
     @page = LoginPage.new
     @page.load
   end
 
-  step "I log in with :login and :password and :remember" do |login, password, remember|
+  step 'I log in with :login and :password and :remember' do |login, password, remember|
     case login
     when 'correct'
       login = CORRECT_LOGIN
@@ -30,11 +32,11 @@ module UserLoginSteps
     end
   end
 
-  step "Login should be successful" do
+  step 'Login should be successful' do
     expect(@page).to be_login_successful
   end
 
-  step"Login should be failed" do
+  step'Login should be failed' do
     expect(@page).to be_login_failed
   end
 end
