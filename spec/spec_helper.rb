@@ -17,6 +17,5 @@ end
 
 Capybara.configure do |config|
   config.default_driver = :selenium
-  config.default_selector = :css
   config.app_host = 'http://demoapp.strongqa.com/'
 end

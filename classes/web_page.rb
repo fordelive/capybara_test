@@ -2,10 +2,10 @@ class WebPage < SitePrism::Page
   element :field_email, "#user_email"
   element :field_password, "#user_password"
   element :btn_submit, "input[name='commit']"
-  element :link_logout, :xpath, "//a[contains(text(),'Logout')]"
+  element :link_logout, :link, 'Logout'
   element :checkbox_remember_me, "label[for='user_remember_me']"
 
-  element :link_login, :xpath, "//a[contains(text(),'Login')]"
+  element :link_login, :link, 'Login'
   element :heading_login_form, "h3.authform__title"
 
   element :flash_alert, "#flash_alert"
