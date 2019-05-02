@@ -1,5 +1,5 @@
-Feature: Stay logged in
-  Scenario:
-    Given I am logged in
-    When  I reopen browser and open Homepage
+Feature: Staying logged in
+  Scenario: User stays logged in
+    Given User is logged in
+    When  User reopens browser and opens Homepage
     Then  Login should be successful

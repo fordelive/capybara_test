@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module UserLoginSteps
-  step 'I visit Login page' do
+  step 'User visits Login page' do
     @page = LoginPage.new
     @page.load
   end
 
-  step 'I log in with :login and :password and :remember' do |login, password, remember|
+  step 'User logs in with :login login and :password password and :remember remember me checkbox' do |login, password, remember|
     case login
     when 'correct'
       login = CORRECT_LOGIN
@@ -25,7 +25,7 @@ module UserLoginSteps
       password = ''
     end
 
-    if remember == 'true'
+    if remember == 'checked'
       @page.log_user_in login, password, true
     else
       @page.log_user_in login, password

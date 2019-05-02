@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module StayLoggedOutSteps
-  step 'I am logged in'
+  step 'User is logged in'
 
-  step 'I log out' do
+  step 'User logs out' do
     @page.click_link('Logout')
   end
 
-  step 'I reopen browser and open Homepage'
-  step 'I showld be logged out'
+  step 'User reopens browser and opens Homepage'
+  step 'User should be logged out'
 end
 
 RSpec.configure { |c| c.include StayLoggedOutSteps }

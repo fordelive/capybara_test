@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-step 'I am logged in' do
+step 'User is logged in' do
   @page = LoginPage.new
   @page.load
   @page.log_user_in CORRECT_LOGIN, CORRECT_PASSWORD, true
 end
 
-step 'I reopen browser and open Homepage' do
+step 'User reopens browser and opens Homepage' do
   @session_cookies = Capybara.page.driver.browser.manage.all_cookies
   Capybara.current_session.reset_session!
 
@@ -14,12 +14,11 @@ step 'I reopen browser and open Homepage' do
   @page.load
 
   @page.page.driver.browser.manage.delete_all_cookies
-  sleep 3
+
   @session_cookies.each {|cookie| @page.page.driver.browser.manage.add_cookie(cookie)}
   @page.page.driver.refresh
 end
 
-step 'I showld be logged out' do
-  sleep 5
+step 'User should be logged out' do
   expect(@page).to be_logout_successful
 end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module StayLoggedInSteps
-  step 'I am logged in'
-  step 'I reopen browser and open Homepage'
-  step 'I showld be logged out'
+  step 'User is logged in'
+  step 'User reopens browser and opens Homepage'
+  step 'User should be logged out'
 end
 
 RSpec.configure { |c| c.include StayLoggedInSteps }
