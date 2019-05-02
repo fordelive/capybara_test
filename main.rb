@@ -23,7 +23,7 @@ SIGNEDIN_CONDITION = "//a[contains(text(),'Logout')]"
 CANNOT_LOGIN_COND1 = "//span[@id='flash_alert']"
 CANNOT_LOGIN_COND2 = "//span[@id='flash_alert']"
 
-Capybara.default_selector = :xpath
+Capybara.default_selector = :css
 
 File.delete(OUTPUT_FILE) if File.exists?(OUTPUT_FILE)
 
