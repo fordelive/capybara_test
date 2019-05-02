@@ -10,3 +10,11 @@ Capybara.configure do |config|
   config.default_selector = :css
   config.app_host = 'http://demoapp.strongqa.com/'
 end
+
+After { Capybara.reset_sessions! }
+
+CORRECT_LOGIN = ENV.fetch('LOGIN')
+CORRECT_PASSWORD = ENV.fetch('PASSWORD')
+
+INCORRECT_LOGIN = 'blabla@mail.net'
+INCORRECT_PASSWORD = '123456'

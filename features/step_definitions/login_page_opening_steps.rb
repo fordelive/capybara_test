@@ -7,6 +7,6 @@ When(/^User clicks Login link$/) do
   @page.navigate_login_page
 end
 
-Then(/^User has navigated to the Login page$/) do
+Then(/^The Login page is opened$/) do
   expect(@page).to be_on_login_page
 end
