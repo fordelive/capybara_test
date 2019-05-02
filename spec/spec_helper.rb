@@ -1,3 +1,7 @@
+require 'bundler/setup'
+
+Bundler.require :test
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -11,10 +15,8 @@ RSpec.configure do |config|
   config.after(:each) {Capybara.current_session.reset_session!}
 end
 
-Bundler.require :test
-
 Capybara.configure do |config|
   config.default_driver = :selenium
-  config.default_selector = :xpath
+  config.default_selector = :css
   config.app_host = 'http://demoapp.strongqa.com/'
 end
