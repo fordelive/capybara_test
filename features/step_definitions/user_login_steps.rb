@@ -38,3 +38,23 @@ Then(/^Login should be (.*)$/) do |state|
   end
 end
 
+When(/^User reopens browser and opens Homepage$/) do
+  @session_cookies = Capybara.page.driver.browser.manage.all_cookies
+  Capybara.current_session.reset_session!
+
+  @page = HomePage.new
+  @page.load
+
+  @page.page.driver.browser.manage.delete_all_cookies
+
+  @session_cookies.each {|cookie| @page.page.driver.browser.manage.add_cookie(cookie)}
+  @page.page.driver.refresh
+end
+
+And(/^User logs out$/) do
+  @page.click_link('Logout')
+end
+
+Then(/^User should be logged out$/) do
+  expect(@page).to be_logout_successful
+end
