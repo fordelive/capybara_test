@@ -14,3 +14,16 @@ Feature: User login
       | correct    | incorrect | unchecked  | failed     |
       | incorrect  | correct   | unchecked  | failed     |
       | incorrect  | incorrect | unchecked  | failed     |
+
+  Scenario: Previously logged in User is automatically logged in
+    Given User visits Login page
+    And   User logs in with correct login and correct password and checked remember me checkbox
+    When  User reopens browser and opens Homepage
+    Then  Login should be successful
+
+  Scenario: User is not logged in automatically after logout
+    Given User visits Login page
+    And   User logs in with correct login and correct password and checked remember me checkbox
+    And   User logs out
+    When  User reopens browser and opens Homepage
+    Then  User should be logged out
