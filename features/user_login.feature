@@ -1,6 +1,8 @@
 Feature: User login
-  Scenario Outline: User logs in
+  Background:
     Given User visits Login page
+
+  Scenario Outline: User logs in
     When  User logs in with <login> login and <password> password and <remember> remember me checkbox
     Then  Login should be <state>
 
@@ -16,14 +18,12 @@ Feature: User login
       | incorrect  | incorrect | unchecked  | failed     |
 
   Scenario: Previously logged in User is automatically logged in
-    Given User visits Login page
-    And   User logs in with correct login and correct password and checked remember me checkbox
+    Given User logs in with correct login and correct password and checked remember me checkbox
     When  User reopens browser and opens Homepage
     Then  Login should be successful
 
   Scenario: User is not logged in automatically after logout
-    Given User visits Login page
-    And   User logs in with correct login and correct password and checked remember me checkbox
+    Given User logs in with correct login and correct password and checked remember me checkbox
     And   User logs out
     When  User reopens browser and opens Homepage
     Then  User should be logged out
